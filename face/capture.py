@@ -1,4 +1,3 @@
-
 import cv2
 from pathlib import Path
 import sys
@@ -17,11 +16,9 @@ save_dir.mkdir(parents=True, exist_ok=True)
 count = len(list(save_dir.glob("*.jpg")))
 
 # 3. 얼굴 찾기 기능 준비
-cascade = cv2.CascadeClassifier(
-    cv2.data.haarcascades +
-    "haarcascade_frontalface_default.xml"
-)
+cascade_path = Path(__file__).resolve().parent / "haarcascade_frontalface_default.xml"
 
+cascade = cv2.CascadeClassifier(str(cascade_path))
 if cascade.empty():
     print("얼굴 검출기 파일을 찾을 수 없습니다.")
     sys.exit()
